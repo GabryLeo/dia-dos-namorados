@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tinhamu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d1b2a;
+      font-family: 'Georgia', serif;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .container {
+      border: 5px solid #00b4d8;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 0 25px #00b4d8;
+      text-align: center;
+      max-width: 800px;
+      background-color: #1a2639;
+      z-index: 1;
+    }
+
+    audio {
+      display: none;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #00b4d8;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .timer {
+      font-size: 1.5em;
+      margin: 20px 0;
+      color: #a8dadc;
+    }
+
+    .fotos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .fotos img {
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+    }
+
+    .foto1, .foto2 {
+      width: 45%;
+      max-width: 300px;
+    }
+
+    .foto3 {
+      width: 93%;
+      max-width: 620px;
+      margin-top: 15px;
+    }
+
+    .frases {
+      font-size: 1.2em;
+      white-space: pre-line;
+      color: #f1faee;
+      margin-top: 30px;
+    }
+
+    .emoji {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      animation: cair 8s linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes cair {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Emojis 💌 -->
+  <script>
+    const quantidade = 15;
+    for (let i = 0; i < quantidade; i++) {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji');
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      emoji.style.fontSize = (Math.random() * 10 + 20) + 'px';
+      emoji.textContent = '💌';
+      document.body.appendChild(emoji);
+    }
+  </script>
+
+  <div class="container">
+    <audio autoplay loop>
+      <source src="die-with-a-smile.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
+    </audio>
+
+    <h1>Tinhamu 💕</h1>
+
+    <div class="timer" id="contador">Carregando amor... 💞</div>
+
+    <div class="fotos">
+      <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_09e80d33.jpg" alt="Foto 1" class="foto1">
+      <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_1a99822a.jpg" alt="Foto 2" class="foto2">
+      <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_1cb63be9.jpg" alt="Foto 3" class="foto3">
+    </div>
+
+    <div class="frases">
+      Minha amiga<br>
+      Minha companheira<br>
+      Minha paixão<br>
+      Meu porto seguro<br>
+      Meu amor<br>
+      Te amo 💖
+    </div>
+  </div>
+
+  <script>
+    const inicio = new Date("2024-10-26T00:00:00");
+    const contador = document.getElementById("contador");
+
+    function atualizarTempo() {
+      const agora = new Date();
+      let diff = agora - inicio;
+
+      if (diff < 0) {
+        contador.textContent = "A contagem começa em 26/10/2024 💞";
+        return;
+      }
+
+      let segundos = Math.floor(diff / 1000);
+      let minutos = Math.floor(segundos / 60);
+      let horas = Math.floor(minutos / 60);
+      let dias = Math.floor(horas / 24);
+      let meses = Math.floor(dias / 30);
+
+      segundos = segundos % 60;
+      minutos = minutos % 60;
+      horas = horas % 24;
+      dias = dias % 30;
+
+      contador.textContent = `${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos juntos 💞`;
+    }
+
+    setInterval(atualizarTempo, 1000);
+    atualizarTempo();
+  </script>
+
+</body>
+</html>
