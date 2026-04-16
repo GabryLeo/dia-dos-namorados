@@ -46,28 +46,51 @@
       color: #a8dadc;
     }
 
-    .fotos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
+    .carrossel {
+      position: relative;
+      width: 100%;
+      max-width: 620px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 15px;
     }
 
-    .fotos img {
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slides img {
+      min-width: 100%;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+      object-fit: cover;
     }
 
-    .foto1, .foto2 {
-      width: 45%;
-      max-width: 300px;
+    .btn-carrossel {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 180, 216, 0.7);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
     }
 
-    .foto3 {
-      width: 93%;
-      max-width: 620px;
-      margin-top: 15px;
+    .btn-esquerda {
+      left: 10px;
+    }
+
+    .btn-direita {
+      right: 10px;
+    }
+
+    .btn-carrossel:hover {
+      background-color: rgba(0, 180, 216, 1);
     }
 
     .frases {
@@ -103,7 +126,6 @@
 </head>
 <body>
 
-  <!-- Emojis 💌 -->
   <script>
     const quantidade = 15;
     for (let i = 0; i < quantidade; i++) {
@@ -127,10 +149,16 @@
 
     <div class="timer" id="contador">Carregando amor... 💞</div>
 
-    <div class="fotos">
-      <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_09e80d33.jpg" alt="Foto 1" class="foto1">
-      <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_1a99822a.jpg" alt="Foto 2" class="foto2">
-      <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_1cb63be9.jpg" alt="Foto 3" class="foto3">
+    <div class="carrossel">
+      <button class="btn-carrossel btn-esquerda" onclick="mudarSlide(-1)">&#8592;</button>
+
+      <div class="slides" id="slides">
+        <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_09e80d33.jpg" alt="Foto 1">
+        <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_1a99822a.jpg" alt="Foto 2">
+        <img src="Imagem do WhatsApp de 2025-06-10 à(s) 20.21.40_1cb63be9.jpg" alt="Foto 3">
+      </div>
+
+      <button class="btn-carrossel btn-direita" onclick="mudarSlide(1)">&#8594;</button>
     </div>
 
     <div class="frases">
@@ -144,6 +172,7 @@
   </div>
 
   <script>
+    // Contador
     const inicio = new Date("2024-10-26T00:00:00");
     const contador = document.getElementById("contador");
 
@@ -161,17 +190,29 @@
       let horas = Math.floor(minutos / 60);
       let dias = Math.floor(horas / 24);
       let meses = Math.floor(dias / 30);
+      let anos = Math.floor(meses / 12);
 
       segundos = segundos % 60;
       minutos = minutos % 60;
       horas = horas % 24;
       dias = dias % 30;
+      meses = meses % 12;
 
-      contador.textContent = `${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos juntos 💞`;
+      contador.textContent = `${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos juntos 💞`;
     }
 
     setInterval(atualizarTempo, 1000);
     atualizarTempo();
+
+    // Carrossel
+    let atual = 0;
+    const slides = document.getElementById('slides');
+    const total = slides.children.length;
+
+    function mudarSlide(direcao) {
+      atual = (atual + direcao + total) % total;
+      slides.style.transform = `translateX(-${atual * 100}%)`;
+    }
   </script>
 
 </body>
